@@ -10,6 +10,48 @@ services:
     labels:
       - traefik.enable=true
       - traefik.port=8080
+      - traefik.frontend.rule=Host:traefik.${DOMAIN}
       - traefik.backend=traefik
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  prisma:
+    container_name: prisma
+    image: prismagraphql/prisma:1.27
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PRISMA_CONFIG: |
+        port: ${PRISMA_PORT}
+        managementApiSecret: ${PRISMA_MANAGEMENT_API_SECRET}
+        databases:
+          default:
+            connector: postgres
+            host: postgres
+            port: 5432
+            user: ${POSTGRES_USER}
+            password: ${POSTGRES_PASSWORD}
+            migrations: true
+            rawAccess: true
+    labels:
+      - traefik.enable=true
+      - traefik.port=${PRISMA_PORT}
+      - traefik.frontend.rule=Host:prisma.${DOMAIN}
+      - traefik.backend=prisma
+
+  postgres:
+    container_name: postgres
+    image: postgres:10.3
+    restart: always
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    labels:
+      - traefik.enable=true
+      - traefik.backend=postgres
+    volumes:
+      - postgres:/var/lib/postgesql/data
+
+volumes:
+  postgres:
