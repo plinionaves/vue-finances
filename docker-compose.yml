@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  traefik:
+    container_name: traefik
+    image: traefik:1.7.12-alpine
+    command: --api --docker --docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
