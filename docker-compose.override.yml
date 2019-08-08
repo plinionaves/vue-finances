@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+
+  traefik:
+    command: --api --docker --docker.exposedbydefault=false
+    labels:
+      - traefik.frontend.rule=Host:traefik.localhost
