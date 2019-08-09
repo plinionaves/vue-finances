@@ -12,6 +12,7 @@ services:
       - traefik.port=8080
       - traefik.frontend.rule=Host:traefik.${DOMAIN}
       - traefik.backend=traefik
+      - traefik.frontend.auth.basic=${TRAEFIK_AUTH}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
