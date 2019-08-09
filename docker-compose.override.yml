@@ -5,8 +5,16 @@ services:
   traefik:
     command: --api --docker --docker.exposedbydefault=false
 
+  web:
+    command:
+      npm run serve
+    volumes:
+      - ./deps/front:/usr/app
+      - /usr/app/node_modules
+
   api:
-    command: npm run dev
+    command:
+      npm run dev
     volumes:
       - ./deps/back:/usr/app
       - /usr/app/node_modules
