@@ -6,6 +6,8 @@ services:
     command: --api --docker --docker.exposedbydefault=false
 
   web:
+    build:
+      target: dev-stage
     command:
       npm run serve
     volumes:
