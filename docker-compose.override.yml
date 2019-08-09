@@ -10,6 +10,8 @@ services:
       target: dev-stage
     command:
       npm run serve
+    labels:
+      - traefik.port=8000
     volumes:
       - ./deps/front:/usr/app
       - /usr/app/node_modules

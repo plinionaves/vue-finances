@@ -24,7 +24,6 @@ services:
       dockerfile: Dockerfile
     labels:
       - traefik.enable=true
-      - traefik.port=8000
       - traefik.frontend.rule=Host:vuefinances.${DOMAIN}
       - traefik.backend=web
 

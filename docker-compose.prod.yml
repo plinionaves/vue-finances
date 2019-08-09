@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+
+  web:
+    labels:
+      - traefik.port=443
+
+  api:
+    command:
+      npm start
