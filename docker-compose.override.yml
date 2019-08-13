@@ -12,7 +12,6 @@ services:
       npm run serve
     labels:
       - traefik.port=8000
-      - traefik.frontend.rule=Host:vuefinances.${DOMAIN}
     volumes:
       - ./deps/front:/usr/app
       - /usr/app/node_modules
@@ -20,8 +19,6 @@ services:
   api:
     command:
       npm run dev
-    labels:
-      - traefik.frontend.rule=Host:api.vuefinances.${DOMAIN}
     volumes:
       - ./deps/back:/usr/app
       - /usr/app/node_modules

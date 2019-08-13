@@ -25,6 +25,7 @@ services:
       dockerfile: Dockerfile
     labels:
       - traefik.enable=true
+      - traefik.frontend.rule=Host:${DOMAIN}
       - traefik.backend=web
 
   api:
@@ -37,6 +38,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.port=4000
+      - traefik.frontend.rule=Host:api.${DOMAIN}
       - traefik.backend=api
     environment:
       CLIENT_HOSTS:

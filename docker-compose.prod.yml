@@ -29,10 +29,7 @@ services:
   web:
     labels:
       - traefik.port=443
-      - traefik.frontend.rule=Host:${DOMAIN}
 
   api:
     command:
       npm start
-    labels:
-      - traefik.frontend.rule=Host:api.${DOMAIN}
