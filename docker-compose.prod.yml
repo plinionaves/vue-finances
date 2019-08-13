@@ -27,9 +27,11 @@ services:
       - /home/acme.json:/acme.json
 
   web:
+    image: web:${WEB_VERSION}
     labels:
       - traefik.port=443
 
   api:
+    image: api:${API_VERSION}
     command:
       npm start
