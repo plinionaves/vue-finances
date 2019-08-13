@@ -2,6 +2,30 @@ version: '3.4'
 
 services:
 
+  traefik:
+    command:
+      - --api
+      - --debug=false
+      - --logLevel=ERROR
+      - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
+      - --entrypoints=Name:https Address::443 TLS
+      - --defaultentrypoints=http,https
+      - --acme
+      - --acme.storage=acme.json
+      - --acme.entryPoint=https
+      - --acme.onHostRule=true
+      - --acme.httpChallenge.entryPoint=http
+      - --acme.email=${TRAEFIK_ACME_EMAIL}
+      - --docker
+      - --docker.exposedbydefault=false
+      - --docker.domain=${DOMAIN}
+      - --docker.watch=true
+      - --docker.endpoint=unix:///var/run/docker.sock
+    ports:
+      - "443:443"
+    volumes:
+      - /home/acme.json:/acme.json
+
   web:
     labels:
       - traefik.port=443
