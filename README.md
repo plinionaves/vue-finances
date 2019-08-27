@@ -60,9 +60,9 @@ Veja a [grade completa na página do curso](https://www.udemy.com/course/vue-js-
 
 Se quiser testar o projeto localmente basta seguir estes passos:
 
-1. Clone o repositório
+1. Clone o repositório usando HTTPS
 ```bash
-git clone git@github.com:plinionaves/vue-finances.git
+git clone https://github.com/plinionaves/vue-finances.git
 ```
 
 2. Acesse o diretório criado para o projeto
@@ -70,17 +70,27 @@ git clone git@github.com:plinionaves/vue-finances.git
 cd vue-finances
 ```
 
-3. Inicialize o submódulos do Git
+3. Altere o arquivo `.gitmodules` para usar HTTPS também. Esse passo é necessário para que o Git não solicite nenhuma senha
+```bash
+[submodule "deps/front"]
+	path = deps/front
+	url = https://github.com/plinionaves/vue-finances-front.git
+[submodule "deps/back"]
+	path = deps/back
+	url = https://github.com/plinionaves/vue-finances-back.git
+```
+
+4. Inicialize o submódulos do Git
 ```bash
 git submodule init
 ```
 
-4. Clone os repos para puxar o código:
+5. Rode o comando abaixo para "puxar" o código fonte dos submódulos:
 ```bash
 git submodule update
 ```
 
-5. Crie um arquivo `.env` na raiz do projeto e configure as seguintes variáveis de ambiente:
+6. Crie um arquivo `.env` na raiz do projeto e configure as seguintes variáveis de ambiente:
 
 ```bash
 NODE_ENV=development
